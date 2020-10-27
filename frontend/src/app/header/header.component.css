@@ -1,0 +1,19 @@
+.example-spacer {
+    flex: 1 1 auto;
+    display: block;
+    width: 5%;
+    margin: 2%;
+  }
+.sr {
+    flex: 1 1 auto;
+    display: block;
+
+}
+button {
+    margin-right:16px;
+    margin-left: 16px;
+}
+button a {
+    font-size: medium;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
