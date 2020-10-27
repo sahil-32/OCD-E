@@ -17,6 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ProfileComponent } from './profile/profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import { HomepageComponent } from './homepage/homepage.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     LoginComponent,
     RegistrationComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomepageComponent,
+    AboutusComponent
   ],
   imports: [
     BrowserModule,
