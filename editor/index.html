@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <title>Editor</title>
+        <!--Javascript-->
+        <script src="js/codemirror.js"></script>
+        <script src="js/clike/clike.js"></script>
+        <script src="js/python/python.js"></script>
+        <script src="js/autorefresh.js"></script>
+        <link rel="stylesheet" href="css/codemirror.css">
+        <link rel="stylesheet" href="css/3024-day.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <style>
+            div.form-group {
+                margin: 0 auto;
+            }
+        </style>
+        <div class="form-group">
+            <select class="form-control btn btn-warning" id="languageSelect" onchange="langChange(this);">
+                <option disabled selected value>  Select a language </option>
+                <option value="clike">C++</option>
+                <option value="clike">Java</option>
+                <option value="python">Python</option>
+            </select>
+            <textarea class="form-control" id="editor" ></textarea>
+          </div>
+
+        <script>
+            var md = '';
+            var startingValue = '';
+            function langChange(element) {
+                md = element.options[ element.selectedIndex ].value;
+                var option_user_selection = element.options[ element.selectedIndex ].text;
+                this.editor.setOption("mode", md);
+                var startingValue = '';
+                if(option_user_selection == 'C++') {
+                    md = "text/x-c++src";
+                    startingValue += '#include<iostream>;';
+                    startingValue += '\n';
+                    startingValue += 'using namespace std;';
+                    startingValue += '\n';
+                    startingValue += '\n';
+                    startingValue += 'int main(){ \n\n}';
+                }
+                if(option_user_selection == 'Java'){
+                    md = "text/x-java";
+                    startingValue += 
+                `public class AddTwoIntegers {
+    public static void main(String[] args) {
+
+        int first = 10;
+        int second = 20;
+
+        System.out.println("Enter two numbers: " + first + " " + second);
+        int sum = first + second;
+
+        System.out.println("The sum is: " + sum);
+    }
+}`
+                }
+                if(option_user_selection == 'Python'){
+                    startingValue += 'print("Hello World")';
+                }
+                this.editor.setOption("value", startingValue);
+            }
+           
+            var mytextarea = document.getElementById('editor');
+            var editor = CodeMirror.fromTextArea(mytextarea,{
+                mode: "python",
+                theme: "3024-day",
+                lineNumbers: true,
+                viewportMargin: 50,
+                showCursorWhenSelecting: true,
+                gutter: true,
+                lineWrapping: true,
+                autoRefresh: true,
+                value: startingValue
+            });
+            editor.setSize(600 , 500);
+        </script>
+
+    </body>
+</html>
