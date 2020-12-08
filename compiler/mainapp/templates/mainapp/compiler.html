@@ -1,0 +1,67 @@
+ {% extends "mainapp/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Compiler</legend>
+                {{ form }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Run</button>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        var md = '';
+        var startingValue = '';
+        var mytextarea = document.getElementById('id_code');
+        var editor = CodeMirror.fromTextArea(mytextarea,{
+            mode: "text/x-python",
+            theme: "3024-day",
+            lineNumbers: true,
+            viewportMargin: 50,
+            showCursorWhenSelecting: true,
+            gutter: true,
+            lineWrapping: true,
+            autoRefresh: true,
+        });
+        editor.setSize(800 , 400);
+        $("#id_language").on("change", function() {
+        var option_user_selection = document.getElementById('id_language').value;
+        var startingValue = '';
+        if(option_user_selection == 1) {
+            md = "text/x-c++src";
+            startingValue += '#include<iostream>;';
+            startingValue += '\n';
+            startingValue += 'using namespace std;';
+            startingValue += '\n';
+            startingValue += '\n';
+            startingValue += 'int main(){ \n\n}';
+        }
+        if(option_user_selection == 3){
+            md = "text/x-java";
+            startingValue += 
+        `public class AddTwoIntegers {
+    public static void main(String[] args) {
+
+        int first = 10;
+        int second = 20;
+
+        System.out.println("Enter two numbers: " + first + " " + second);
+        int sum = first + second;
+
+        System.out.println("The sum is: " + sum);
+    }
+}`
+        }
+        if(option_user_selection == 2){
+            md = "text/x-python";
+            startingValue += 'print("Hello World")';
+        }
+        editor.setOption("mode", md);
+        editor.setOption("value", startingValue);
+    });
+    </script>
+{% endblock content %}
