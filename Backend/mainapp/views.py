@@ -55,7 +55,7 @@ def compiler(request):
                 command1 = [txt1]
                 command2 = [txt2]
                 p = subprocess.Popen(command1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                time.sleep(2)
+                p.wait()
                 text,err = p.communicate()
                 file1 = open("out.txt","w") 
                 if(p.returncode !=0):
@@ -81,7 +81,7 @@ def compiler(request):
                 txt1 = "python3 myfile.py < input.txt"
                 command1 = [txt1]
                 p = subprocess.Popen(command1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                time.sleep(2)
+                p.wait()
                 text,err = p.communicate()
                 file1 = open("out.txt","w") 
                 if(p.returncode !=0):
@@ -105,7 +105,7 @@ def compiler(request):
                 txt1 = "java myfile.java < input.txt"
                 command1 = [txt1]
                 p = subprocess.Popen(command1, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                time.sleep(2)
+                p.wait()
                 text,err = p.communicate()
                 file1 = open("out.txt","w") 
                 if(p.returncode !=0):
@@ -145,27 +145,31 @@ def output(request):
         if request.method == 'POST':
             global lang
             name = request.POST.get('name')
-            if(lang == 1):
-                local_file = open('myfile.cpp')
-                djangofile = File(local_file)
-                d = Document(name=name,docfile=djangofile,user=request.user)
-                d.docfile.name = name
-                d.save()
-                return redirect('compiler')
-            elif(lang == 2):
-                local_file = open('myfile.py')
-                djangofile = File(local_file)
-                d = Document(name=name,docfile=djangofile,user=request.user)
-                d.docfile.name = name
-                d.save()
-                return redirect('compiler')
-            elif(lang == 3):
-                local_file = open('myfile.java')
-                djangofile = File(local_file)
-                d = Document(name=name,docfile=djangofile,user=request.user)
-                d.docfile.name = name
-                d.save()
-                return redirect('compiler')
+            count = Document.objects.filter(user=request.user).count()
+            if(count == 10):
+                return redirect('failure')
+            else:
+                if(lang == 1):
+                    local_file = open('myfile.cpp')
+                    djangofile = File(local_file)
+                    d = Document(name=name,docfile=djangofile,user=request.user)
+                    d.docfile.name = name
+                    d.save()
+                    return redirect('compiler')
+                elif(lang == 2):
+                    local_file = open('myfile.py')
+                    djangofile = File(local_file)
+                    d = Document(name=name,docfile=djangofile,user=request.user)
+                    d.docfile.name = name
+                    d.save()
+                    return redirect('compiler')
+                elif(lang == 3):
+                    local_file = open('myfile.java')
+                    djangofile = File(local_file)
+                    d = Document(name=name,docfile=djangofile,user=request.user)
+                    d.docfile.name = name
+                    d.save()
+                    return redirect('compiler')
         else:
             f8 = open("out.txt","r")
             file_content = f8.read()

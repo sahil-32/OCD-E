@@ -23,12 +23,16 @@ def get(request):
 
 def post(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'],user=request.user,name=form.cleaned_data['name'])
-            newdoc.docfile.name = form.cleaned_data['name']
-            newdoc.save()
-            return redirect('viewfile')
+        count = Document.objects.filter(user=request.user).count()
+        if(count == 10):
+            return redirect('failure')
+        else:
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                newdoc = Document(docfile=request.FILES['docfile'],user=request.user,name=form.cleaned_data['name'])
+                newdoc.docfile.name = form.cleaned_data['name']
+                newdoc.save()
+                return redirect('viewfile')
     else:
         form = DocumentForm() 
 
@@ -39,3 +43,6 @@ def delete(request,pk):
         file = Document.objects.get(pk=pk)
         file.delete()
     return redirect('viewfile')
+
+def failure(request):
+    return render(request, 'user/failure.html')

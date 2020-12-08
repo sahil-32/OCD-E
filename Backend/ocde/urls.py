@@ -27,6 +27,7 @@ urlpatterns = [
     path('output/', mainapp_views.output, name='output'),
     path('reset/', mainapp_views.reset, name='reset'),
     path('register/',user_views.register, name='register'),
+    path('failure/',user_views.failure, name='failure'),
     path('upload/',user_views.post, name='upload'),
     path('viewfile/<int:pk>',user_views.delete, name='delete'),
     path('edit/<int:pk>',mainapp_views.edit, name='edit'),

@@ -14,3 +14,7 @@ class Document(models.Model):
     def delete(self, *args, **kwargs):
         self.docfile.delete()
         super().delete(*args, **kwargs)
+
+class Counter(models.Model):
+    count = models.IntegerField(default=0)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='Counter',on_delete=models.CASCADE)
