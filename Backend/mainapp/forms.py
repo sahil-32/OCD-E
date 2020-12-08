@@ -8,4 +8,4 @@ class CompilerForm(forms.Form):
 ) 
     code = forms.CharField(widget=forms.Textarea)
     input = forms.CharField(widget=forms.Textarea,required=False)
-    language = forms.ChoiceField(choices = lang) 
+    language = forms.ChoiceField(choices = lang, initial=2) 
