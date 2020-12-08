@@ -2,6 +2,19 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="container">
-    {{file_content}}
+        {{file_content}}
+            {% if isedit%}
+            <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-outline-info" type="submit">Save Changes</button>
+        </form>
+        {% else %}
+            <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="name">
+            <button class="btn btn-outline-info" type="submit">upload</button>
+            </form>    
+        {% endif %}
+        <a href="{% url 'compiler' %}">Back</a>
     </div>
 {% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "mainapp/base.html" %}
+{% block content %}
+    <div class="container">
+        <ul> 
+        {% for file in documents %} 
+            <li>{{ file.name}}</li> 
+
+            <form method="POST" action="{% url 'delete' file.pk %}">
+            {% csrf_token %}
+            <button type="submit">delete</button>
+            </form>
+
+            <form method="POST" action="{% url 'edit' file.pk %}">
+            {% csrf_token %}
+            <button type="submit">Edit</button>
+            </form>
+ 
+        {% endfor %} 
+        </ul> 
+        <a href="{% url 'homepage' %}">Home</a>
+    </div>
+{% endblock content %}
