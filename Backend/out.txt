@@ -1,13 +1,1 @@
-myfile.cpp:27:19: warning: missing terminating ' character
-   27 | read both the repo's but was unable to find the difference
-      |                   ^
-myfile.cpp:27:19: error: missing terminating ' character
-   27 | read both the repo's but was unable to find the difference
-      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-myfile.cpp:1:9: error: found ‘:’ in nested-name-specifier, expected ‘::’
-    1 | problem : thumbnail not showing
-      |         ^
-      |         ::
-myfile.cpp:1:1: error: ‘problem’ does not name a type
-    1 | problem : thumbnail not showing
-      | ^~~~~~~
+4
