@@ -60,6 +60,7 @@
             <form method="POST">
             {% csrf_token %}
             <button class="btn btn-outline-dark mt-5" type="submit">Save Changes</button>
+            <a href="{% url 'compiler' %}" class="btn btn-outline-dark mt-5">Edit</a>
         </form>
         {% else %}
             <form method="POST">

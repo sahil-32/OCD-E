@@ -2,5 +2,7 @@
 using namespace std;
 
 int main(){ 
-cout<<4;
+int n;
+  cin>>n;
+  cout<<n;
 }

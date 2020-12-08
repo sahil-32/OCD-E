@@ -70,7 +70,7 @@
 
 <div class="container" style="margin-top:30px">
 {% load crispy_forms_tags %}
-        <form method="POST">
+        <form method="POST" novalidate>
             {% csrf_token %}
             <fieldset class="form-group">
                 {{ form|crispy }}
@@ -95,7 +95,7 @@
             lineWrapping: true,
             autoRefresh: true,
         });
-        editor.setSize(1110 , 400);
+        editor.setSize(1110 , 285);
         $("#id_language").on("change", function() {
         var option_user_selection = document.getElementById('id_language').value;
         var startingValue = '';

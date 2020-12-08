@@ -1,1 +1,4 @@
-4
+Traceback (most recent call last):
+  File "myfile.py", line 1, in <module>
+    wef
+NameError: name 'wef' is not defined

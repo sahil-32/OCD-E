@@ -1,2 +1,1 @@
-var = input()
-print(var)
+wef
